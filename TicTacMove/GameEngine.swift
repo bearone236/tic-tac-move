@@ -57,7 +57,15 @@ final class GameEngine: ObservableObject {
         return Set(adjacentIndices(of: selected).filter { board[$0] == nil })
     }
 
-    func tapCell(_ index: Int) {
+    /// Entry point for human taps on the board. Refuses to act when it's the
+    /// CPU's turn, so the human can never move the CPU's pieces even if a
+    /// stale UI briefly lets a tap through.
+    func humanTapCell(_ index: Int) {
+        guard isHumanTurn else { return }
+        processTap(index)
+    }
+
+    private func processTap(_ index: Int) {
         switch phase {
         case .placing:
             placePiece(at: index)
@@ -223,10 +231,10 @@ final class GameEngine: ObservableObject {
     private func perform(_ action: Action) {
         switch action {
         case .place(let index):
-            tapCell(index)
+            processTap(index)
         case .move(let from, let to):
-            tapCell(from)
-            tapCell(to)
+            processTap(from)
+            processTap(to)
         }
     }
 

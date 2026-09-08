@@ -19,7 +19,7 @@ struct BoardView: View {
                             Button {
                                 UIImpactFeedbackGenerator(style: .light).impactOccurred()
                                 withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                    engine.tapCell(index)
+                                    engine.humanTapCell(index)
                                 }
                             } label: {
                                 CellView(

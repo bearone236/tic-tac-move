@@ -14,11 +14,9 @@ struct GameView: View {
                 BoardView(engine: engine)
                     .padding(.horizontal, 20)
                 Spacer(minLength: 0)
-                resetButton
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 12)
             }
             .padding(.top, 12)
+            .padding(.bottom, 24)
 
             if showConfetti {
                 ConfettiView()
@@ -147,22 +145,6 @@ struct GameView: View {
         case .finished:
             return "ゲーム終了"
         }
-    }
-
-    private var resetButton: some View {
-        Button {
-            withAnimation {
-                showConfetti = false
-                engine.reset()
-            }
-        } label: {
-            Label("リセット", systemImage: "arrow.counterclockwise")
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
-        }
-        .buttonStyle(.borderedProminent)
-        .tint(Theme.accent)
     }
 }
 
