@@ -33,10 +33,17 @@ Before submitting to the App Store, replace the **test** IDs with your own
 AdMob account's real IDs:
 
 - `AdManager.swift` → `adUnitID` (interstitial ad unit ID)
-- Project build settings → `INFOPLIST_KEY_GADApplicationIdentifier` (App ID)
+- `TicTacMove/Info.plist` → `GADApplicationIdentifier` (App ID)
 
 Both currently hold Google's public test IDs, which always serve test ads
 and are safe to leave in for development.
+
+Note: this project uses a real, checked-in `Info.plist` (rather than
+Xcode's build-settings-generated one) specifically because
+`GADApplicationIdentifier` is a third-party key — Xcode's Info.plist
+auto-generation only recognizes Apple's own keys and silently drops
+unknown ones, which otherwise makes the AdMob SDK crash at launch
+complaining the App ID is missing.
 
 ## Project layout
 
