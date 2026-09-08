@@ -38,6 +38,7 @@ final class GameEngine: ObservableObject {
     @Published private(set) var selectedIndex: Int?
     @Published private(set) var scoreX = 0
     @Published private(set) var scoreO = 0
+    @Published var isCPUOpponent = true
 
     private var placedCount: [Player: Int] = [.x: 0, .o: 0]
 
@@ -46,6 +47,15 @@ final class GameEngine: ObservableObject {
     }
 
     var isGameOver: Bool { phase == .finished }
+
+    /// CPU always plays O; the human plays X and moves first.
+    var isHumanTurn: Bool { !(isCPUOpponent && currentPlayer == .o) }
+
+    /// Empty cells the currently-selected piece may legally move to, for highlighting.
+    var validDestinations: Set<Int> {
+        guard phase == .moving, let selected = selectedIndex else { return [] }
+        return Set(adjacentIndices(of: selected).filter { board[$0] == nil })
+    }
 
     func tapCell(_ index: Int) {
         switch phase {
@@ -171,5 +181,103 @@ final class GameEngine: ObservableObject {
         } else {
             scoreO += 1
         }
+    }
+
+    // MARK: - CPU opponent
+
+    private enum Action {
+        case place(Int)
+        case move(Int, Int)
+    }
+
+    /// Picks and applies a move for the current player via the same `tapCell`
+    /// path a human uses, so scoring/win-detection stay in one place.
+    func performAIMove() {
+        guard !isGameOver else { return }
+        let player = currentPlayer
+        let candidates = actions(on: board, phase: phase, for: player)
+        guard !candidates.isEmpty else { return }
+
+        if let winningMove = candidates.first(where: { Self.winner(on: apply($0, to: board, by: player)) == player }) {
+            perform(winningMove)
+            return
+        }
+
+        let opponent = player.opponent
+        let safeMoves = candidates.filter { action in
+            let nextBoard = apply(action, to: board, by: player)
+            let nextPlacedCount = updatedPlacedCount(after: action, player: player)
+            let nextPhase = updatedPhase(after: nextPlacedCount)
+            let opponentReplies = actions(on: nextBoard, phase: nextPhase, for: opponent)
+            return !opponentReplies.contains { reply in
+                Self.winner(on: apply(reply, to: nextBoard, by: opponent)) == opponent
+            }
+        }
+
+        let pool = safeMoves.isEmpty ? candidates : safeMoves
+        if let chosen = pool.randomElement() {
+            perform(chosen)
+        }
+    }
+
+    private func perform(_ action: Action) {
+        switch action {
+        case .place(let index):
+            tapCell(index)
+        case .move(let from, let to):
+            tapCell(from)
+            tapCell(to)
+        }
+    }
+
+    private func actions(on board: [Player?], phase: GamePhase, for player: Player) -> [Action] {
+        switch phase {
+        case .placing:
+            return board.indices.filter { board[$0] == nil }.map { .place($0) }
+        case .moving:
+            var result: [Action] = []
+            for (index, value) in board.enumerated() where value == player {
+                for adjacent in adjacentIndices(of: index) where board[adjacent] == nil {
+                    result.append(.move(index, adjacent))
+                }
+            }
+            return result
+        case .finished:
+            return []
+        }
+    }
+
+    private func apply(_ action: Action, to board: [Player?], by player: Player) -> [Player?] {
+        var result = board
+        switch action {
+        case .place(let index):
+            result[index] = player
+        case .move(let from, let to):
+            result[to] = player
+            result[from] = nil
+        }
+        return result
+    }
+
+    private func updatedPlacedCount(after action: Action, player: Player) -> [Player: Int] {
+        guard case .place = action else { return placedCount }
+        var copy = placedCount
+        copy[player, default: 0] += 1
+        return copy
+    }
+
+    private func updatedPhase(after placedCount: [Player: Int]) -> GamePhase {
+        guard phase == .placing else { return phase }
+        return placedCount[.x] == Self.piecesPerPlayer && placedCount[.o] == Self.piecesPerPlayer
+            ? .moving : .placing
+    }
+
+    private static func winner(on board: [Player?]) -> Player? {
+        for line in winningLines {
+            if let first = board[line[0]], line.allSatisfy({ board[$0] == first }) {
+                return first
+            }
+        }
+        return nil
     }
 }

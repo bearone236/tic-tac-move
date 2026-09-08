@@ -7,7 +7,7 @@ struct GameView: View {
 
     var body: some View {
         ZStack {
-            backgroundGradient
+            Theme.background.ignoresSafeArea()
 
             VStack(spacing: 28) {
                 header
@@ -28,6 +28,7 @@ struct GameView: View {
         }
         .navigationTitle("Tic Tac Move")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
@@ -43,8 +44,15 @@ struct GameView: View {
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
+                        .foregroundStyle(.white)
                 }
             }
+        }
+        .onChange(of: engine.currentPlayer) { _ in
+            triggerAIIfNeeded()
+        }
+        .onAppear {
+            triggerAIIfNeeded()
         }
         .onChange(of: engine.winner) { winner in
             guard winner != nil else { return }
@@ -70,21 +78,21 @@ struct GameView: View {
         }
     }
 
+    private func triggerAIIfNeeded() {
+        guard engine.isCPUOpponent, !engine.isHumanTurn, !engine.isGameOver else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                engine.performAIMove()
+            }
+        }
+    }
+
     private func celebrateWin() {
         UINotificationFeedbackGenerator().notificationOccurred(.success)
         withAnimation { showConfetti = true }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
             withAnimation { showConfetti = false }
         }
-    }
-
-    private var backgroundGradient: some View {
-        LinearGradient(
-            colors: [Color.indigo.opacity(0.18), Color.purple.opacity(0.10), Color(.systemGroupedBackground)],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .ignoresSafeArea()
     }
 
     private var header: some View {
@@ -99,7 +107,7 @@ struct GameView: View {
     }
 
     private func scoreChip(for player: Player) -> some View {
-        let tint: Color = player == .x ? .blue : .red
+        let tint = Theme.markColor(for: player)
         return HStack(spacing: 8) {
             Text(player.rawValue)
                 .font(.headline.bold())
@@ -109,23 +117,26 @@ struct GameView: View {
         .foregroundStyle(tint)
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
-        .background(
-            Capsule().fill(tint.opacity(0.15))
-        )
+        .background(Capsule().fill(tint.opacity(0.16)))
+        .overlay(Capsule().stroke(tint.opacity(0.4), lineWidth: 1))
     }
 
     private var statusBadge: some View {
         Text(phaseDescription)
             .font(.subheadline.weight(.medium))
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.white.opacity(0.75))
             .padding(.horizontal, 14)
             .padding(.vertical, 6)
-            .background(Capsule().fill(Color(.secondarySystemGroupedBackground)))
+            .background(Capsule().fill(Theme.cardFill))
+            .overlay(Capsule().stroke(Theme.cardStroke, lineWidth: 1))
             .frame(minHeight: 34)
             .animation(.easeInOut(duration: 0.2), value: phaseDescription)
     }
 
     private var phaseDescription: String {
+        if engine.isCPUOpponent && !engine.isHumanTurn && !engine.isGameOver {
+            return "CPU が考え中…"
+        }
         switch engine.phase {
         case .placing:
             return "\(engine.currentPlayer.rawValue) の番：コマを置いてください"
@@ -151,7 +162,7 @@ struct GameView: View {
                 .padding(.vertical, 14)
         }
         .buttonStyle(.borderedProminent)
-        .tint(.indigo)
+        .tint(Theme.accent)
     }
 }
 

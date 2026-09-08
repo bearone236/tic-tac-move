@@ -2,6 +2,8 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var engine = GameEngine()
+    @State private var isVsCPU = true
+    @State private var startGame = false
 
     var body: some View {
         NavigationStack {
@@ -15,9 +17,13 @@ struct HomeView: View {
 
                     Spacer()
 
-                    VStack(spacing: 16) {
-                        NavigationLink {
-                            GameView(engine: engine)
+                    VStack(spacing: 20) {
+                        modePicker
+
+                        Button {
+                            engine.isCPUOpponent = isVsCPU
+                            engine.reset()
+                            startGame = true
                         } label: {
                             Label("対戦を始める", systemImage: "play.fill")
                                 .font(.headline)
@@ -25,7 +31,7 @@ struct HomeView: View {
                                 .padding(.vertical, 16)
                         }
                         .buttonStyle(.borderedProminent)
-                        .tint(.indigo)
+                        .tint(Theme.accent)
 
                         NavigationLink {
                             HowToPlayView()
@@ -34,33 +40,46 @@ struct HomeView: View {
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
+                                .foregroundStyle(.white)
                         }
                         .buttonStyle(.bordered)
-                        .tint(.indigo)
+                        .tint(.white.opacity(0.4))
                     }
                     .padding(.horizontal, 32)
                     .padding(.bottom, 48)
                 }
             }
+            .navigationDestination(isPresented: $startGame) {
+                GameView(engine: engine)
+            }
         }
+        .preferredColorScheme(.dark)
+    }
+
+    private var modePicker: some View {
+        Picker("対戦モード", selection: $isVsCPU) {
+            Text("CPU対戦").tag(true)
+            Text("2人プレイ").tag(false)
+        }
+        .pickerStyle(.segmented)
     }
 
     private var titleBlock: some View {
         ZStack {
-            FloatingMark(text: "X", color: .blue)
+            FloatingMark(text: "X", color: Theme.xColor)
                 .offset(x: -90, y: -30)
-            FloatingMark(text: "O", color: .red)
+            FloatingMark(text: "O", color: Theme.oColor)
                 .offset(x: 96, y: 40)
 
             VStack(spacing: 10) {
                 Text("Tic Tac Move")
                     .font(.system(size: 40, weight: .heavy, design: .rounded))
                     .foregroundStyle(
-                        LinearGradient(colors: [.indigo, .purple], startPoint: .leading, endPoint: .trailing)
+                        LinearGradient(colors: [Theme.xColor, Theme.accent, Theme.oColor], startPoint: .leading, endPoint: .trailing)
                     )
                 Text("置いて、動かして、揃えよう")
                     .font(.subheadline.weight(.medium))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.white.opacity(0.6))
             }
         }
     }
@@ -75,7 +94,7 @@ private struct FloatingMark: View {
     var body: some View {
         Text(text)
             .font(.system(size: 96, weight: .heavy, design: .rounded))
-            .foregroundStyle(color.opacity(0.16))
+            .foregroundStyle(color.opacity(0.18))
             .offset(y: offsetY)
             .onAppear {
                 withAnimation(.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
@@ -90,13 +109,13 @@ private struct AnimatedBackground: View {
 
     var body: some View {
         ZStack {
-            Color(.systemGroupedBackground)
+            Theme.background
             LinearGradient(
-                colors: [Color.indigo, Color.purple, Color.blue],
+                colors: [Theme.xColor, Theme.accent, Theme.oColor],
                 startPoint: animate ? .topLeading : .bottomTrailing,
                 endPoint: animate ? .bottomTrailing : .topLeading
             )
-            .opacity(0.22)
+            .opacity(0.16)
         }
         .ignoresSafeArea()
         .onAppear {

@@ -16,18 +16,23 @@ struct BoardView: View {
                     HStack(spacing: spacing) {
                         ForEach(0..<GameEngine.boardSize, id: \.self) { col in
                             let index = row * GameEngine.boardSize + col
-                            CellView(
-                                player: engine.board[index],
-                                isSelected: engine.selectedIndex == index,
-                                isWinningCell: engine.winningLine?.contains(index) ?? false
-                            )
-                            .frame(width: cellSize, height: cellSize)
-                            .onTapGesture {
+                            Button {
                                 UIImpactFeedbackGenerator(style: .light).impactOccurred()
                                 withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                     engine.tapCell(index)
                                 }
+                            } label: {
+                                CellView(
+                                    player: engine.board[index],
+                                    isSelected: engine.selectedIndex == index,
+                                    isValidDestination: engine.validDestinations.contains(index),
+                                    isWinningCell: engine.winningLine?.contains(index) ?? false
+                                )
+                                .frame(width: cellSize, height: cellSize)
+                                .contentShape(Rectangle())
                             }
+                            .buttonStyle(.plain)
+                            .disabled(!engine.isHumanTurn)
                         }
                     }
                 }
@@ -39,8 +44,11 @@ struct BoardView: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .fill(Color(.secondarySystemGroupedBackground))
-                .shadow(color: .black.opacity(0.12), radius: 16, x: 0, y: 8)
+                .fill(Theme.cardFill)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 28, style: .continuous)
+                        .stroke(Theme.cardStroke, lineWidth: 1)
+                )
         )
     }
 }
@@ -48,20 +56,23 @@ struct BoardView: View {
 private struct CellView: View {
     let player: Player?
     let isSelected: Bool
+    let isValidDestination: Bool
     let isWinningCell: Bool
 
     var body: some View {
         RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .fill(backgroundGradient)
+            .fill(Color.white.opacity(isWinningCell ? 0.16 : 0.05))
             .overlay(
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .stroke(borderColor, lineWidth: isSelected ? 3 : 1)
+                    .stroke(borderColor, lineWidth: isSelected || isValidDestination ? 2.5 : 1)
             )
             .overlay(mark)
+            .overlay(destinationDot)
+            .shadow(color: glowColor, radius: (isSelected || isWinningCell) ? 12 : 0)
             .scaleEffect(isSelected ? 1.05 : 1.0)
-            .shadow(color: isWinningCell ? Color.green.opacity(0.5) : .clear, radius: 10)
             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isSelected)
             .animation(.easeInOut(duration: 0.3), value: isWinningCell)
+            .animation(.easeInOut(duration: 0.25), value: isValidDestination)
     }
 
     @ViewBuilder
@@ -69,35 +80,38 @@ private struct CellView: View {
         if let player {
             Text(player.rawValue)
                 .font(.system(size: 44, weight: .heavy, design: .rounded))
-                .foregroundStyle(foregroundColor)
+                .foregroundStyle(Theme.markColor(for: player))
+                .shadow(color: Theme.markColor(for: player).opacity(0.7), radius: 8)
                 .transition(.scale.combined(with: .opacity))
-                .id(player.rawValue + String(isWinningCell))
         }
     }
 
-    private var backgroundGradient: LinearGradient {
-        if isWinningCell {
-            return LinearGradient(
-                colors: [Color.green.opacity(0.45), Color.green.opacity(0.25)],
-                startPoint: .topLeading, endPoint: .bottomTrailing
-            )
+    @ViewBuilder
+    private var destinationDot: some View {
+        if isValidDestination {
+            Circle()
+                .fill(Theme.accent.opacity(0.8))
+                .frame(width: 14, height: 14)
+                .shadow(color: Theme.accent, radius: 6)
         }
-        return LinearGradient(
-            colors: [Color(.tertiarySystemGroupedBackground), Color(.tertiarySystemGroupedBackground)],
-            startPoint: .topLeading, endPoint: .bottomTrailing
-        )
     }
 
     private var borderColor: Color {
-        isSelected ? Color.yellow : Color.primary.opacity(0.12)
+        if isWinningCell { return Theme.accent }
+        if isSelected { return Theme.accent }
+        if isValidDestination { return Theme.accent.opacity(0.7) }
+        return Color.white.opacity(0.12)
     }
 
-    private var foregroundColor: Color {
-        player == .x ? .blue : .red
+    private var glowColor: Color {
+        if isWinningCell { return Theme.accent.opacity(0.6) }
+        if isSelected { return Theme.accent.opacity(0.5) }
+        return .clear
     }
 }
 
 #Preview {
     BoardView(engine: GameEngine())
         .padding()
+        .background(Theme.background)
 }

@@ -16,6 +16,7 @@
 		C16AA2C24005D5FBDF011C4B /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23030CFFD765F51FD39AB084 /* HowToPlayView.swift */; };
 		808F1B5DC1B5BBFFF5CDAE2D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E80D415013C111166EBC0A /* GameView.swift */; };
 		4222681603081E0033DB8452 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FC155D9103D3E9CDF794E /* ConfettiView.swift */; };
+		41660954EA5CD3B88EC90987 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA251804CF46600F00E9B95E /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		23030CFFD765F51FD39AB084 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		B2E80D415013C111166EBC0A /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		012FC155D9103D3E9CDF794E /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		EA251804CF46600F00E9B95E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				B2E80D415013C111166EBC0A /* GameView.swift */,
 				23030CFFD765F51FD39AB084 /* HowToPlayView.swift */,
 				012FC155D9103D3E9CDF794E /* ConfettiView.swift */,
+				EA251804CF46600F00E9B95E /* Theme.swift */,
 				F78B9DA98D0513580BEDEF35 /* GameEngine.swift */,
 				DF36FFF094C0D296373D1736 /* BoardView.swift */,
 				AA66A77595C0C83CC510FFA1 /* Assets.xcassets */,
@@ -157,6 +160,7 @@
 				808F1B5DC1B5BBFFF5CDAE2D /* GameView.swift in Sources */,
 				C16AA2C24005D5FBDF011C4B /* HowToPlayView.swift in Sources */,
 				4222681603081E0033DB8452 /* ConfettiView.swift in Sources */,
+				41660954EA5CD3B88EC90987 /* Theme.swift in Sources */,
 				30D1C8436F6EC404EF9292AE /* GameEngine.swift in Sources */,
 				9576E8F67FFBDACBFEA92C39 /* BoardView.swift in Sources */,
 			);
