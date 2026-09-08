@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct BoardView: View {
     @ObservedObject var engine: GameEngine
@@ -22,6 +23,7 @@ struct BoardView: View {
                             )
                             .frame(width: cellSize, height: cellSize)
                             .onTapGesture {
+                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                                 withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                     engine.tapCell(index)
                                 }

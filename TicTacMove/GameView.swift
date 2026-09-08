@@ -1,7 +1,9 @@
 import SwiftUI
+import UIKit
 
-struct ContentView: View {
-    @StateObject private var engine = GameEngine()
+struct GameView: View {
+    @ObservedObject var engine: GameEngine
+    @State private var showConfetti = false
 
     var body: some View {
         ZStack {
@@ -16,7 +18,37 @@ struct ContentView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 12)
             }
-            .padding(.top, 24)
+            .padding(.top, 12)
+
+            if showConfetti {
+                ConfettiView()
+                    .allowsHitTesting(false)
+                    .transition(.opacity)
+            }
+        }
+        .navigationTitle("Tic Tac Move")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Button {
+                        withAnimation { engine.resetScores() }
+                    } label: {
+                        Label("スコアをリセット", systemImage: "arrow.counterclockwise.circle")
+                    }
+                    NavigationLink {
+                        HowToPlayView()
+                    } label: {
+                        Label("遊び方", systemImage: "questionmark.circle")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+            }
+        }
+        .onChange(of: engine.winner) { winner in
+            guard winner != nil else { return }
+            celebrateWin()
         }
         .alert(
             "ゲーム終了",
@@ -26,12 +58,23 @@ struct ContentView: View {
             )
         ) {
             Button("もう一度") {
-                withAnimation { engine.reset() }
+                withAnimation {
+                    showConfetti = false
+                    engine.reset()
+                }
             }
         } message: {
             if let winner = engine.winner {
                 Text("\(winner.rawValue) の勝ちです！")
             }
+        }
+    }
+
+    private func celebrateWin() {
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        withAnimation { showConfetti = true }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+            withAnimation { showConfetti = false }
         }
     }
 
@@ -46,12 +89,6 @@ struct ContentView: View {
 
     private var header: some View {
         VStack(spacing: 14) {
-            Text("Tic Tac Move")
-                .font(.system(size: 34, weight: .heavy, design: .rounded))
-                .foregroundStyle(
-                    LinearGradient(colors: [.indigo, .purple], startPoint: .leading, endPoint: .trailing)
-                )
-
             HStack(spacing: 16) {
                 scoreChip(for: .x)
                 scoreChip(for: .o)
@@ -103,7 +140,10 @@ struct ContentView: View {
 
     private var resetButton: some View {
         Button {
-            withAnimation { engine.reset() }
+            withAnimation {
+                showConfetti = false
+                engine.reset()
+            }
         } label: {
             Label("リセット", systemImage: "arrow.counterclockwise")
                 .font(.headline)
@@ -116,5 +156,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    NavigationStack {
+        GameView(engine: GameEngine())
+    }
 }
