@@ -1,11 +1,12 @@
 import SwiftUI
 
-/// A color scheme for X/O, unlocked by cumulative wins.
+/// A color scheme and mark shape for X/O, unlocked by cumulative wins.
 struct Skin: Identifiable, Equatable {
     let id: String
     let name: String
     let xColor: Color
     let oColor: Color
+    let style: MarkStyle
     let requiredWins: Int
 
     func color(for player: Player) -> Color {
@@ -20,11 +21,11 @@ final class ProgressStore: ObservableObject {
     static let shared = ProgressStore()
 
     static let skins: [Skin] = [
-        Skin(id: "default", name: "デフォルト", xColor: Theme.xColor, oColor: Theme.oColor, requiredWins: 0),
-        Skin(id: "sunrise", name: "サンライズ", xColor: Color(red: 1.0, green: 0.55, blue: 0.25), oColor: Color(red: 1.0, green: 0.25, blue: 0.35), requiredWins: 3),
-        Skin(id: "forest", name: "フォレスト", xColor: Color(red: 0.45, green: 0.95, blue: 0.55), oColor: Color(red: 0.95, green: 0.85, blue: 0.35), requiredWins: 10),
-        Skin(id: "mono", name: "モノクローム", xColor: .white, oColor: Color(white: 0.55), requiredWins: 25),
-        Skin(id: "galaxy", name: "ギャラクシー", xColor: Color(red: 1.0, green: 0.85, blue: 0.35), oColor: Color(red: 0.55, green: 0.4, blue: 1.0), requiredWins: 50),
+        Skin(id: "default", name: "デフォルト", xColor: Theme.xColor, oColor: Theme.oColor, style: .classic, requiredWins: 0),
+        Skin(id: "sunrise", name: "サンライズ", xColor: Color(red: 1.0, green: 0.55, blue: 0.25), oColor: Color(red: 1.0, green: 0.25, blue: 0.35), style: .outline, requiredWins: 3),
+        Skin(id: "forest", name: "フォレスト", xColor: Color(red: 0.45, green: 0.95, blue: 0.55), oColor: Color(red: 0.95, green: 0.85, blue: 0.35), style: .leaf, requiredWins: 10),
+        Skin(id: "mono", name: "モノクローム", xColor: .white, oColor: Color(white: 0.55), style: .crystal, requiredWins: 25),
+        Skin(id: "galaxy", name: "ギャラクシー", xColor: Color(red: 1.0, green: 0.85, blue: 0.35), oColor: Color(red: 0.55, green: 0.4, blue: 1.0), style: .cosmic, requiredWins: 50),
     ]
 
     private static let winsKey = "TicTacMove.totalWins"

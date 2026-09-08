@@ -17,10 +17,10 @@ struct GameOverOverlay: View {
                     .foregroundStyle(.white.opacity(0.6))
 
                 if let winner {
-                    let color = progress.currentSkin.color(for: winner)
-                    Text(winner.rawValue)
-                        .font(.system(size: 64, weight: .heavy, design: .rounded))
-                        .foregroundStyle(color)
+                    let skin = progress.currentSkin
+                    let color = skin.color(for: winner)
+                    PieceGlyph(player: winner, style: skin.style, color: color)
+                        .frame(width: 72, height: 72)
                         .shadow(color: color, radius: 18)
 
                     Text("\(winner.rawValue) の勝ち！")

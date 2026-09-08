@@ -43,12 +43,11 @@ private struct SkinCard: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack(spacing: 10) {
-                Text("X")
-                    .foregroundStyle(skin.xColor)
-                Text("O")
-                    .foregroundStyle(skin.oColor)
+                PieceGlyph(player: .x, style: skin.style, color: skin.xColor)
+                    .frame(width: 40, height: 40)
+                PieceGlyph(player: .o, style: skin.style, color: skin.oColor)
+                    .frame(width: 40, height: 40)
             }
-            .font(.system(size: 32, weight: .heavy, design: .rounded))
             .opacity(unlocked ? 1 : 0.25)
 
             Text(skin.name)

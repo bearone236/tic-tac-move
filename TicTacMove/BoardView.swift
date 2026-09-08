@@ -4,56 +4,60 @@ import UIKit
 struct BoardView: View {
     @ObservedObject var engine: GameEngine
 
+    /// Fixed content size (width == height), supplied by the caller from a
+    /// stable measurement — see GameView. Deliberately NOT computed via an
+    /// internal GeometryReader here: a GeometryReader competing with a
+    /// sibling Spacer for leftover VStack height is unstable and made the
+    /// board visibly drift/bounce during animations.
+    let side: CGFloat
+
     private let spacing: CGFloat = 12
 
-    var body: some View {
-        GeometryReader { geometry in
-            let side = min(geometry.size.width, geometry.size.height)
-            let cellSize = (side - spacing * CGFloat(GameEngine.boardSize - 1)) / CGFloat(GameEngine.boardSize)
+    private var cellSize: CGFloat {
+        (side - spacing * CGFloat(GameEngine.boardSize - 1)) / CGFloat(GameEngine.boardSize)
+    }
 
-            ZStack {
-                VStack(spacing: spacing) {
-                    ForEach(0..<GameEngine.boardSize, id: \.self) { row in
-                        HStack(spacing: spacing) {
-                            ForEach(0..<GameEngine.boardSize, id: \.self) { col in
-                                let index = row * GameEngine.boardSize + col
-                                Button {
-                                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                        engine.humanTapCell(index)
-                                    }
-                                } label: {
-                                    CellBackground(
-                                        isSelected: engine.selectedIndex == index,
-                                        isValidDestination: engine.validDestinations.contains(index),
-                                        isWinningCell: engine.winningLine?.contains(index) ?? false
-                                    )
-                                    .frame(width: cellSize, height: cellSize)
-                                    .contentShape(Rectangle())
+    var body: some View {
+        ZStack {
+            VStack(spacing: spacing) {
+                ForEach(0..<GameEngine.boardSize, id: \.self) { row in
+                    HStack(spacing: spacing) {
+                        ForEach(0..<GameEngine.boardSize, id: \.self) { col in
+                            let index = row * GameEngine.boardSize + col
+                            Button {
+                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                    engine.humanTapCell(index)
                                 }
-                                .buttonStyle(.plain)
-                                .disabled(!engine.isHumanTurn)
+                            } label: {
+                                CellBackground(
+                                    isSelected: engine.selectedIndex == index,
+                                    isValidDestination: engine.validDestinations.contains(index),
+                                    isWinningCell: engine.winningLine?.contains(index) ?? false
+                                )
+                                .frame(width: cellSize, height: cellSize)
+                                .contentShape(Rectangle())
                             }
+                            .buttonStyle(.plain)
+                            .disabled(!engine.isHumanTurn)
                         }
                     }
                 }
-
-                ForEach(engine.pieces) { piece in
-                    PieceMarkView(
-                        player: piece.player,
-                        isSelected: engine.selectedIndex == piece.index,
-                        isWinningCell: engine.winningLine?.contains(piece.index) ?? false
-                    )
-                    .frame(width: cellSize, height: cellSize)
-                    .position(center(of: piece.index, cellSize: cellSize))
-                    .animation(.spring(response: 0.35, dampingFraction: 0.75), value: piece.index)
-                    .allowsHitTesting(false)
-                }
             }
-            .frame(width: side, height: side)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            ForEach(engine.pieces) { piece in
+                PieceMarkView(
+                    player: piece.player,
+                    isSelected: engine.selectedIndex == piece.index,
+                    isWinningCell: engine.winningLine?.contains(piece.index) ?? false
+                )
+                .frame(width: cellSize, height: cellSize)
+                .position(center(of: piece.index))
+                .animation(.spring(response: 0.35, dampingFraction: 0.75), value: piece.index)
+                .allowsHitTesting(false)
+            }
         }
-        .aspectRatio(1, contentMode: .fit)
+        .frame(width: side, height: side)
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
@@ -65,7 +69,7 @@ struct BoardView: View {
         )
     }
 
-    private func center(of index: Int, cellSize: CGFloat) -> CGPoint {
+    private func center(of index: Int) -> CGPoint {
         let row = index / GameEngine.boardSize
         let col = index % GameEngine.boardSize
         let x = CGFloat(col) * (cellSize + spacing) + cellSize / 2
@@ -121,10 +125,9 @@ private struct PieceMarkView: View {
     @ObservedObject private var progress = ProgressStore.shared
 
     var body: some View {
-        let color = progress.currentSkin.color(for: player)
-        Text(player.rawValue)
-            .font(.system(size: 44, weight: .heavy, design: .rounded))
-            .foregroundStyle(color)
+        let skin = progress.currentSkin
+        let color = skin.color(for: player)
+        PieceGlyph(player: player, style: skin.style, color: color)
             .shadow(color: color.opacity(isWinningCell ? 1 : 0.7), radius: isWinningCell ? 14 : 8)
             .scaleEffect(isSelected ? 1.15 : 1.0)
             .transition(.scale.combined(with: .opacity))
@@ -133,7 +136,7 @@ private struct PieceMarkView: View {
 }
 
 #Preview {
-    BoardView(engine: GameEngine())
+    BoardView(engine: GameEngine(), side: 320)
         .padding()
         .background(Theme.background)
 }

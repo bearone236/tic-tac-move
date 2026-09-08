@@ -8,30 +8,36 @@ struct GameView: View {
     @State private var showConfetti = false
 
     var body: some View {
-        ZStack {
-            AmbientBackground()
+        GeometryReader { geometry in
+            // Computed once from the screen's own (stable) size — not from
+            // an inner GeometryReader competing with a sibling Spacer for
+            // leftover height, which made the board visibly drift/bounce.
+            let boardSide = min(geometry.size.width - 40, geometry.size.height - 260)
 
-            VStack(spacing: 24) {
-                topBar
-                header
-                BoardView(engine: engine)
-                    .padding(.horizontal, 20)
-                Spacer(minLength: 0)
-            }
-            .padding(.top, 8)
-            .padding(.bottom, 24)
+            ZStack {
+                AmbientBackground()
 
-            if showConfetti {
-                ConfettiView()
-                    .allowsHitTesting(false)
-                    .transition(.opacity)
-            }
-
-            if engine.isGameOver {
-                GameOverOverlay(winner: engine.winner) {
-                    playAgain()
+                VStack(spacing: 24) {
+                    topBar
+                    header
+                    BoardView(engine: engine, side: boardSide)
+                    Spacer(minLength: 0)
                 }
-                .transition(.opacity)
+                .padding(.top, 8)
+                .padding(.bottom, 24)
+
+                if showConfetti {
+                    ConfettiView()
+                        .allowsHitTesting(false)
+                        .transition(.opacity)
+                }
+
+                if engine.isGameOver {
+                    GameOverOverlay(winner: engine.winner) {
+                        playAgain()
+                    }
+                    .transition(.opacity)
+                }
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -161,7 +167,6 @@ struct GameView: View {
             .background(Capsule().fill(Theme.cardFill))
             .overlay(Capsule().stroke(Theme.cardStroke, lineWidth: 1))
             .frame(minHeight: 34)
-            .animation(.easeInOut(duration: 0.2), value: phaseDescription)
     }
 
     private var phaseDescription: String {

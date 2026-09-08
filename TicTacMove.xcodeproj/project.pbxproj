@@ -27,6 +27,7 @@
 		7EC013B2D953E8EC9CF97954 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64308C1F8D5D84D62030010 /* AdManager.swift */; };
 		DE8074090271F0C31F88E2BF /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B06489E3435372583A3DA8 /* ProgressStore.swift */; };
 		CB673BCE216DCBAC5FA0BD95 /* SkinsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A36E217F0429F0D859A887 /* SkinsView.swift */; };
+		D555946A42FAB5EFAC907910 /* PieceGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED06CB15F587E435CCB6AC8D /* PieceGlyph.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		F64308C1F8D5D84D62030010 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		21B06489E3435372583A3DA8 /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
 		F1A36E217F0429F0D859A887 /* SkinsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinsView.swift; sourceTree = "<group>"; };
+		ED06CB15F587E435CCB6AC8D /* PieceGlyph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceGlyph.swift; sourceTree = "<group>"; };
 		8EE007C019ABD5BD6F9BD1BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 				F64308C1F8D5D84D62030010 /* AdManager.swift */,
 				21B06489E3435372583A3DA8 /* ProgressStore.swift */,
 				F1A36E217F0429F0D859A887 /* SkinsView.swift */,
+				ED06CB15F587E435CCB6AC8D /* PieceGlyph.swift */,
 				8EE007C019ABD5BD6F9BD1BE /* Info.plist */,
 				E91FE54575DBE6F608438EBF /* SoundPlayer.swift */,
 				F78B9DA98D0513580BEDEF35 /* GameEngine.swift */,
@@ -202,6 +205,7 @@
 				7EC013B2D953E8EC9CF97954 /* AdManager.swift in Sources */,
 				DE8074090271F0C31F88E2BF /* ProgressStore.swift in Sources */,
 				CB673BCE216DCBAC5FA0BD95 /* SkinsView.swift in Sources */,
+				D555946A42FAB5EFAC907910 /* PieceGlyph.swift in Sources */,
 				5CC2AA6D2E85FEC5A40C3900 /* SoundPlayer.swift in Sources */,
 				30D1C8436F6EC404EF9292AE /* GameEngine.swift in Sources */,
 				9576E8F67FFBDACBFEA92C39 /* BoardView.swift in Sources */,
