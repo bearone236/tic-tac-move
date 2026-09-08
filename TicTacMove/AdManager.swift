@@ -18,7 +18,7 @@ final class AdManager: NSObject {
     // TODO: replace with your own AdMob interstitial ad unit ID before release.
     private let adUnitID = "ca-app-pub-3940256099942544/4411468910"
 
-    private var interstitial: GADInterstitialAd?
+    private var interstitial: InterstitialAd?
     private var onDismiss: (() -> Void)?
 
     private override init() {
@@ -27,7 +27,7 @@ final class AdManager: NSObject {
     }
 
     func loadAd() {
-        GADInterstitialAd.load(withAdUnitID: adUnitID, request: GADRequest()) { [weak self] ad, _ in
+        InterstitialAd.load(with: adUnitID, request: Request()) { [weak self] ad, _ in
             guard let self else { return }
             self.interstitial = ad
             self.interstitial?.fullScreenContentDelegate = self
@@ -43,7 +43,7 @@ final class AdManager: NSObject {
             return
         }
         self.onDismiss = onDismiss
-        interstitial.present(fromRootViewController: root)
+        interstitial.present(from: root)
     }
 
     private static func topViewController() -> UIViewController? {
@@ -60,14 +60,14 @@ final class AdManager: NSObject {
     }
 }
 
-extension AdManager: GADFullScreenContentDelegate {
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+extension AdManager: FullScreenContentDelegate {
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         loadAd()
         onDismiss?()
         onDismiss = nil
     }
 
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+    func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         loadAd()
         onDismiss?()
         onDismiss = nil
