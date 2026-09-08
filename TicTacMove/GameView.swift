@@ -25,6 +25,13 @@ struct GameView: View {
                     .allowsHitTesting(false)
                     .transition(.opacity)
             }
+
+            if engine.isGameOver {
+                GameOverOverlay(winner: engine.winner) {
+                    playAgain()
+                }
+                .transition(.opacity)
+            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
@@ -48,23 +55,12 @@ struct GameView: View {
         .onDisappear {
             SoundPlayer.shared.stopBGM()
         }
-        .alert(
-            "ゲーム終了",
-            isPresented: Binding(
-                get: { engine.isGameOver },
-                set: { _ in }
-            )
-        ) {
-            Button("もう一度") {
-                withAnimation {
-                    showConfetti = false
-                    engine.reset()
-                }
-            }
-        } message: {
-            if let winner = engine.winner {
-                Text("\(winner.rawValue) の勝ちです！")
-            }
+    }
+
+    private func playAgain() {
+        withAnimation { showConfetti = false }
+        AdManager.shared.showAd {
+            engine.reset()
         }
     }
 

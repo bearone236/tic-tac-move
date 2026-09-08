@@ -23,6 +23,8 @@
 		45DD9FBA007C811A790BEAA2 /* bgm_ambient.wav in Resources */ = {isa = PBXBuildFile; fileRef = 582B293420EFE38C1D91ABB4 /* bgm_ambient.wav */; };
 		5CC2AA6D2E85FEC5A40C3900 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91FE54575DBE6F608438EBF /* SoundPlayer.swift */; };
 		C521898A234CEC554572AB7A /* AmbientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71698EF116117442259DD1AF /* AmbientBackground.swift */; };
+		F06020EC8E1C45557B5B7EEE /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C3766FDDA184917E624FBE /* GameOverOverlay.swift */; };
+		7EC013B2D953E8EC9CF97954 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64308C1F8D5D84D62030010 /* AdManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		582B293420EFE38C1D91ABB4 /* bgm_ambient.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm_ambient.wav; sourceTree = "<group>"; };
 		E91FE54575DBE6F608438EBF /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		71698EF116117442259DD1AF /* AmbientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBackground.swift; sourceTree = "<group>"; };
+		64C3766FDDA184917E624FBE /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
+		F64308C1F8D5D84D62030010 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 				012FC155D9103D3E9CDF794E /* ConfettiView.swift */,
 				EA251804CF46600F00E9B95E /* Theme.swift */,
 				71698EF116117442259DD1AF /* AmbientBackground.swift */,
+				64C3766FDDA184917E624FBE /* GameOverOverlay.swift */,
+				F64308C1F8D5D84D62030010 /* AdManager.swift */,
 				E91FE54575DBE6F608438EBF /* SoundPlayer.swift */,
 				F78B9DA98D0513580BEDEF35 /* GameEngine.swift */,
 				DF36FFF094C0D296373D1736 /* BoardView.swift */,
@@ -184,6 +190,8 @@
 				4222681603081E0033DB8452 /* ConfettiView.swift in Sources */,
 				41660954EA5CD3B88EC90987 /* Theme.swift in Sources */,
 				C521898A234CEC554572AB7A /* AmbientBackground.swift in Sources */,
+				F06020EC8E1C45557B5B7EEE /* GameOverOverlay.swift in Sources */,
+				7EC013B2D953E8EC9CF97954 /* AdManager.swift in Sources */,
 				5CC2AA6D2E85FEC5A40C3900 /* SoundPlayer.swift in Sources */,
 				30D1C8436F6EC404EF9292AE /* GameEngine.swift in Sources */,
 				9576E8F67FFBDACBFEA92C39 /* BoardView.swift in Sources */,
@@ -322,6 +330,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Tic Tac Move";
+				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-3940256099942544~1458002511";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "この識別子は、あなたに合わせた広告を表示するために使用されます。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -351,6 +361,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Tic Tac Move";
+				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-3940256099942544~1458002511";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "この識別子は、あなたに合わせた広告を表示するために使用されます。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
