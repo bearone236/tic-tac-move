@@ -4,14 +4,20 @@ struct ContentView: View {
     @StateObject private var engine = GameEngine()
 
     var body: some View {
-        VStack(spacing: 24) {
-            header
-            BoardView(engine: engine)
-                .padding(.horizontal)
-            Spacer()
-            resetButton
+        ZStack {
+            backgroundGradient
+
+            VStack(spacing: 28) {
+                header
+                BoardView(engine: engine)
+                    .padding(.horizontal, 20)
+                Spacer(minLength: 0)
+                resetButton
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 12)
+            }
+            .padding(.top, 24)
         }
-        .padding()
         .alert(
             "ゲーム終了",
             isPresented: Binding(
@@ -20,7 +26,7 @@ struct ContentView: View {
             )
         ) {
             Button("もう一度") {
-                engine.reset()
+                withAnimation { engine.reset() }
             }
         } message: {
             if let winner = engine.winner {
@@ -29,31 +35,57 @@ struct ContentView: View {
         }
     }
 
-    private var header: some View {
-        VStack(spacing: 8) {
-            Text("Tic Tac Move")
-                .font(.largeTitle.bold())
+    private var backgroundGradient: some View {
+        LinearGradient(
+            colors: [Color.indigo.opacity(0.18), Color.purple.opacity(0.10), Color(.systemGroupedBackground)],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
+    }
 
-            HStack(spacing: 32) {
-                scoreLabel(for: .x)
-                scoreLabel(for: .o)
+    private var header: some View {
+        VStack(spacing: 14) {
+            Text("Tic Tac Move")
+                .font(.system(size: 34, weight: .heavy, design: .rounded))
+                .foregroundStyle(
+                    LinearGradient(colors: [.indigo, .purple], startPoint: .leading, endPoint: .trailing)
+                )
+
+            HStack(spacing: 16) {
+                scoreChip(for: .x)
+                scoreChip(for: .o)
             }
 
-            Text(phaseDescription)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .frame(height: 20)
+            statusBadge
         }
     }
 
-    private func scoreLabel(for player: Player) -> some View {
-        VStack {
+    private func scoreChip(for player: Player) -> some View {
+        let tint: Color = player == .x ? .blue : .red
+        return HStack(spacing: 8) {
             Text(player.rawValue)
-                .font(.headline)
-                .foregroundStyle(player == .x ? .blue : .red)
+                .font(.headline.bold())
             Text("\(player == .x ? engine.scoreX : engine.scoreO)")
-                .font(.title2.monospacedDigit())
+                .font(.headline.monospacedDigit())
         }
+        .foregroundStyle(tint)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(
+            Capsule().fill(tint.opacity(0.15))
+        )
+    }
+
+    private var statusBadge: some View {
+        Text(phaseDescription)
+            .font(.subheadline.weight(.medium))
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 6)
+            .background(Capsule().fill(Color(.secondarySystemGroupedBackground)))
+            .frame(minHeight: 34)
+            .animation(.easeInOut(duration: 0.2), value: phaseDescription)
     }
 
     private var phaseDescription: String {
@@ -65,18 +97,21 @@ struct ContentView: View {
                 ? "\(engine.currentPlayer.rawValue) の番：移動先のマスを選んでください"
                 : "\(engine.currentPlayer.rawValue) の番：動かすコマを選んでください"
         case .finished:
-            return ""
+            return "ゲーム終了"
         }
     }
 
     private var resetButton: some View {
-        Button(role: .destructive) {
-            engine.reset()
+        Button {
+            withAnimation { engine.reset() }
         } label: {
-            Text("リセット")
+            Label("リセット", systemImage: "arrow.counterclockwise")
+                .font(.headline)
                 .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
         }
-        .buttonStyle(.bordered)
+        .buttonStyle(.borderedProminent)
+        .tint(.indigo)
     }
 }
 
