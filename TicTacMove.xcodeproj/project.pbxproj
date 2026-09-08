@@ -7,50 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4CAEE13B1B256FE57BB829F4 /* TicTacMoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4E6D44FD921052061870E7 /* TicTacMoveApp.swift */; };
-		30D1C8436F6EC404EF9292AE /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B9DA98D0513580BEDEF35 /* GameEngine.swift */; };
-		9576E8F67FFBDACBFEA92C39 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36FFF094C0D296373D1736 /* BoardView.swift */; };
-		E7BB4E1757FFDD1DEDB3F3FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA66A77595C0C83CC510FFA1 /* Assets.xcassets */; };
+		0F9D3DF4BA73380649024449 /* sfx_win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 73445429B57F1B9EFC237E93 /* sfx_win.wav */; };
+		170E7AD120F813B99CF5D95E /* sfx_piece.wav in Resources */ = {isa = PBXBuildFile; fileRef = C0E27A581ED90793DCB9FEF0 /* sfx_piece.wav */; };
 		287BA1FD8E25A0E1CDFE9D00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64304DBA543DD1A74BFD7846 /* Preview Assets.xcassets */; };
+		30D1C8436F6EC404EF9292AE /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78B9DA98D0513580BEDEF35 /* GameEngine.swift */; };
+		41660954EA5CD3B88EC90987 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA251804CF46600F00E9B95E /* Theme.swift */; };
+		4222681603081E0033DB8452 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FC155D9103D3E9CDF794E /* ConfettiView.swift */; };
+		45DD9FBA007C811A790BEAA2 /* bgm_ambient.wav in Resources */ = {isa = PBXBuildFile; fileRef = 582B293420EFE38C1D91ABB4 /* bgm_ambient.wav */; };
+		4CAEE13B1B256FE57BB829F4 /* TicTacMoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4E6D44FD921052061870E7 /* TicTacMoveApp.swift */; };
+		5CC2AA6D2E85FEC5A40C3900 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91FE54575DBE6F608438EBF /* SoundPlayer.swift */; };
+		755BDD2F305069A200431A28 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 755BDD2E305069A200431A28 /* GoogleMobileAds */; };
+		7EC013B2D953E8EC9CF97954 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64308C1F8D5D84D62030010 /* AdManager.swift */; };
+		808F1B5DC1B5BBFFF5CDAE2D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E80D415013C111166EBC0A /* GameView.swift */; };
+		9576E8F67FFBDACBFEA92C39 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36FFF094C0D296373D1736 /* BoardView.swift */; };
 		B2FCD0C3F8BED47451A6ED90 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E6A59B5DDFA79243996473 /* HomeView.swift */; };
 		C16AA2C24005D5FBDF011C4B /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23030CFFD765F51FD39AB084 /* HowToPlayView.swift */; };
-		808F1B5DC1B5BBFFF5CDAE2D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E80D415013C111166EBC0A /* GameView.swift */; };
-		4222681603081E0033DB8452 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FC155D9103D3E9CDF794E /* ConfettiView.swift */; };
-		41660954EA5CD3B88EC90987 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA251804CF46600F00E9B95E /* Theme.swift */; };
-		CF49586E499A55DC01329F11 /* sfx_select.wav in Resources */ = {isa = PBXBuildFile; fileRef = DFF933330B74D7C8216E459E /* sfx_select.wav */; };
-		170E7AD120F813B99CF5D95E /* sfx_piece.wav in Resources */ = {isa = PBXBuildFile; fileRef = C0E27A581ED90793DCB9FEF0 /* sfx_piece.wav */; };
-		0F9D3DF4BA73380649024449 /* sfx_win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 73445429B57F1B9EFC237E93 /* sfx_win.wav */; };
-		45DD9FBA007C811A790BEAA2 /* bgm_ambient.wav in Resources */ = {isa = PBXBuildFile; fileRef = 582B293420EFE38C1D91ABB4 /* bgm_ambient.wav */; };
-		5CC2AA6D2E85FEC5A40C3900 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91FE54575DBE6F608438EBF /* SoundPlayer.swift */; };
 		C521898A234CEC554572AB7A /* AmbientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71698EF116117442259DD1AF /* AmbientBackground.swift */; };
-		F06020EC8E1C45557B5B7EEE /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C3766FDDA184917E624FBE /* GameOverOverlay.swift */; };
-		7EC013B2D953E8EC9CF97954 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64308C1F8D5D84D62030010 /* AdManager.swift */; };
-		DE8074090271F0C31F88E2BF /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B06489E3435372583A3DA8 /* ProgressStore.swift */; };
 		CB673BCE216DCBAC5FA0BD95 /* SkinsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A36E217F0429F0D859A887 /* SkinsView.swift */; };
+		CF49586E499A55DC01329F11 /* sfx_select.wav in Resources */ = {isa = PBXBuildFile; fileRef = DFF933330B74D7C8216E459E /* sfx_select.wav */; };
+		DE8074090271F0C31F88E2BF /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B06489E3435372583A3DA8 /* ProgressStore.swift */; };
+		E7BB4E1757FFDD1DEDB3F3FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA66A77595C0C83CC510FFA1 /* Assets.xcassets */; };
+		F06020EC8E1C45557B5B7EEE /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C3766FDDA184917E624FBE /* GameOverOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3C4E6D44FD921052061870E7 /* TicTacMoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacMoveApp.swift; sourceTree = "<group>"; };
-		F78B9DA98D0513580BEDEF35 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
-		DF36FFF094C0D296373D1736 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
-		AA66A77595C0C83CC510FFA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		64304DBA543DD1A74BFD7846 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		FBE7A1E200C5CCDEEA8CE055 /* TicTacMove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacMove.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		38E6A59B5DDFA79243996473 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		23030CFFD765F51FD39AB084 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
-		B2E80D415013C111166EBC0A /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		012FC155D9103D3E9CDF794E /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
-		EA251804CF46600F00E9B95E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		DFF933330B74D7C8216E459E /* sfx_select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_select.wav; sourceTree = "<group>"; };
-		C0E27A581ED90793DCB9FEF0 /* sfx_piece.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_piece.wav; sourceTree = "<group>"; };
-		73445429B57F1B9EFC237E93 /* sfx_win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_win.wav; sourceTree = "<group>"; };
-		582B293420EFE38C1D91ABB4 /* bgm_ambient.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm_ambient.wav; sourceTree = "<group>"; };
-		E91FE54575DBE6F608438EBF /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
-		71698EF116117442259DD1AF /* AmbientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBackground.swift; sourceTree = "<group>"; };
-		64C3766FDDA184917E624FBE /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
-		F64308C1F8D5D84D62030010 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		21B06489E3435372583A3DA8 /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
+		23030CFFD765F51FD39AB084 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
+		38E6A59B5DDFA79243996473 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		3C4E6D44FD921052061870E7 /* TicTacMoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacMoveApp.swift; sourceTree = "<group>"; };
+		582B293420EFE38C1D91ABB4 /* bgm_ambient.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm_ambient.wav; sourceTree = "<group>"; };
+		64304DBA543DD1A74BFD7846 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		64C3766FDDA184917E624FBE /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
+		71698EF116117442259DD1AF /* AmbientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBackground.swift; sourceTree = "<group>"; };
+		73445429B57F1B9EFC237E93 /* sfx_win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_win.wav; sourceTree = "<group>"; };
+		AA66A77595C0C83CC510FFA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B2E80D415013C111166EBC0A /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		C0E27A581ED90793DCB9FEF0 /* sfx_piece.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_piece.wav; sourceTree = "<group>"; };
+		DF36FFF094C0D296373D1736 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		DFF933330B74D7C8216E459E /* sfx_select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_select.wav; sourceTree = "<group>"; };
+		E91FE54575DBE6F608438EBF /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		EA251804CF46600F00E9B95E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F1A36E217F0429F0D859A887 /* SkinsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinsView.swift; sourceTree = "<group>"; };
+		F64308C1F8D5D84D62030010 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
+		F78B9DA98D0513580BEDEF35 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		FBE7A1E200C5CCDEEA8CE055 /* TicTacMove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacMove.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				755BDD2F305069A200431A28 /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +72,22 @@
 				C8690BD3A6524E5E61E93968 /* TicTacMove */,
 				181486319453551404288D6D /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		181486319453551404288D6D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FBE7A1E200C5CCDEEA8CE055 /* TicTacMove.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3C9B09BA14C38ABF76ADB7AA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				64304DBA543DD1A74BFD7846 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		C8690BD3A6524E5E61E93968 /* TicTacMove */ = {
@@ -97,22 +115,6 @@
 				3C9B09BA14C38ABF76ADB7AA /* Preview Content */,
 			);
 			path = TicTacMove;
-			sourceTree = "<group>";
-		};
-		3C9B09BA14C38ABF76ADB7AA /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				64304DBA543DD1A74BFD7846 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		181486319453551404288D6D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FBE7A1E200C5CCDEEA8CE055 /* TicTacMove.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +161,9 @@
 				Base,
 			);
 			mainGroup = 0BF8741371DEAED5860B01E2;
+			packageReferences = (
+				755BDD2D305069A200431A28 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			productRefGroup = 181486319453551404288D6D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -271,61 +276,6 @@
 			};
 			name = Debug;
 		};
-		E63A740AEBC9C95D06286972 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		56E2F628EB1E1309F146BEC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -389,18 +339,64 @@
 			};
 			name = Release;
 		};
+		E63A740AEBC9C95D06286972 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		43E16C8939D6F377829BB614 /* Build configuration list for PBXProject "TicTacMove" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				259FFA8FF5E2CBBD3D28FDB0 /* Debug */,
-				E63A740AEBC9C95D06286972 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		10AD5F07C7E308BDD36EECB0 /* Build configuration list for PBXNativeTarget "TicTacMove" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -410,7 +406,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		43E16C8939D6F377829BB614 /* Build configuration list for PBXProject "TicTacMove" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				259FFA8FF5E2CBBD3D28FDB0 /* Debug */,
+				E63A740AEBC9C95D06286972 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		755BDD2D305069A200431A28 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		755BDD2E305069A200431A28 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 755BDD2D305069A200431A28 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9F175C0BC5AF9CDF12DE339D /* Project object */;
 }
