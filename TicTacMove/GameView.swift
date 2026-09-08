@@ -3,6 +3,7 @@ import UIKit
 
 struct GameView: View {
     @ObservedObject var engine: GameEngine
+    @ObservedObject private var progress = ProgressStore.shared
     @Environment(\.dismiss) private var dismiss
     @State private var showConfetti = false
 
@@ -45,7 +46,8 @@ struct GameView: View {
             SoundPlayer.shared.play(.piece)
         }
         .onChange(of: engine.winner) { winner in
-            guard winner != nil else { return }
+            guard let winner else { return }
+            progress.recordWin(for: winner)
             celebrateWin()
         }
         .onAppear {
@@ -73,6 +75,11 @@ struct GameView: View {
                     withAnimation { engine.resetScores() }
                 } label: {
                     Label("スコアをリセット", systemImage: "arrow.counterclockwise.circle")
+                }
+                NavigationLink {
+                    SkinsView()
+                } label: {
+                    Label("スキン", systemImage: "paintpalette")
                 }
                 NavigationLink {
                     HowToPlayView()
@@ -131,7 +138,7 @@ struct GameView: View {
     }
 
     private func scoreChip(for player: Player) -> some View {
-        let tint = Theme.markColor(for: player)
+        let tint = progress.currentSkin.color(for: player)
         return HStack(spacing: 8) {
             Text(player.rawValue)
                 .font(.headline.bold())

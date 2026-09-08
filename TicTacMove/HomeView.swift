@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var engine = GameEngine()
+    @ObservedObject private var progress = ProgressStore.shared
     @State private var isVsCPU = true
     @State private var startGame = false
 
@@ -33,14 +34,26 @@ struct HomeView: View {
                         .buttonStyle(.borderedProminent)
                         .tint(Theme.accent)
 
-                        NavigationLink {
-                            HowToPlayView()
-                        } label: {
-                            Label("遊び方", systemImage: "questionmark.circle")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
-                                .foregroundStyle(.white)
+                        HStack(spacing: 12) {
+                            NavigationLink {
+                                HowToPlayView()
+                            } label: {
+                                Label("遊び方", systemImage: "questionmark.circle")
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 16)
+                                    .foregroundStyle(.white)
+                            }
+
+                            NavigationLink {
+                                SkinsView()
+                            } label: {
+                                Label("スキン", systemImage: "paintpalette")
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 16)
+                                    .foregroundStyle(.white)
+                            }
                         }
                         .buttonStyle(.bordered)
                         .tint(.white.opacity(0.4))
@@ -65,17 +78,18 @@ struct HomeView: View {
     }
 
     private var titleBlock: some View {
-        ZStack {
-            FloatingMark(text: "X", color: Theme.xColor)
+        let skin = progress.currentSkin
+        return ZStack {
+            FloatingMark(text: "X", color: skin.xColor)
                 .offset(x: -90, y: -30)
-            FloatingMark(text: "O", color: Theme.oColor)
+            FloatingMark(text: "O", color: skin.oColor)
                 .offset(x: 96, y: 40)
 
             VStack(spacing: 10) {
                 Text("Tic Tac Move")
                     .font(.system(size: 40, weight: .heavy, design: .rounded))
                     .foregroundStyle(
-                        LinearGradient(colors: [Theme.xColor, Theme.accent, Theme.oColor], startPoint: .leading, endPoint: .trailing)
+                        LinearGradient(colors: [skin.xColor, Theme.accent, skin.oColor], startPoint: .leading, endPoint: .trailing)
                     )
                 Text("置いて、動かして、揃えよう")
                     .font(.subheadline.weight(.medium))

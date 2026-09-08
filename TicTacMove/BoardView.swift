@@ -118,11 +118,14 @@ private struct PieceMarkView: View {
     let isSelected: Bool
     let isWinningCell: Bool
 
+    @ObservedObject private var progress = ProgressStore.shared
+
     var body: some View {
+        let color = progress.currentSkin.color(for: player)
         Text(player.rawValue)
             .font(.system(size: 44, weight: .heavy, design: .rounded))
-            .foregroundStyle(Theme.markColor(for: player))
-            .shadow(color: Theme.markColor(for: player).opacity(isWinningCell ? 1 : 0.7), radius: isWinningCell ? 14 : 8)
+            .foregroundStyle(color)
+            .shadow(color: color.opacity(isWinningCell ? 1 : 0.7), radius: isWinningCell ? 14 : 8)
             .scaleEffect(isSelected ? 1.15 : 1.0)
             .transition(.scale.combined(with: .opacity))
             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isSelected)

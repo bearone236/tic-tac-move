@@ -14,8 +14,4 @@ enum Theme {
     static let xColor = Color(red: 0.30, green: 0.90, blue: 1.0)      // neon cyan
     static let oColor = Color(red: 1.0, green: 0.28, blue: 0.62)      // neon pink
     static let accent = Color(red: 0.62, green: 0.42, blue: 1.0)      // neon violet
-
-    static func markColor(for player: Player) -> Color {
-        player == .x ? xColor : oColor
-    }
 }

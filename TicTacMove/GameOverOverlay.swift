@@ -5,6 +5,8 @@ struct GameOverOverlay: View {
     let winner: Player?
     let onPlayAgain: () -> Void
 
+    @ObservedObject private var progress = ProgressStore.shared
+
     var body: some View {
         ZStack {
             Color.black.opacity(0.6).ignoresSafeArea()
@@ -15,10 +17,11 @@ struct GameOverOverlay: View {
                     .foregroundStyle(.white.opacity(0.6))
 
                 if let winner {
+                    let color = progress.currentSkin.color(for: winner)
                     Text(winner.rawValue)
                         .font(.system(size: 64, weight: .heavy, design: .rounded))
-                        .foregroundStyle(Theme.markColor(for: winner))
-                        .shadow(color: Theme.markColor(for: winner), radius: 18)
+                        .foregroundStyle(color)
+                        .shadow(color: color, radius: 18)
 
                     Text("\(winner.rawValue) の勝ち！")
                         .font(.title3.bold())
