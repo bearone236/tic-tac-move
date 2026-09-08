@@ -1,5 +1,13 @@
 import Foundation
 
+/// A single placed piece with a stable identity, so the board view can
+/// animate it sliding between cells instead of cross-fading.
+struct BoardPiece: Identifiable {
+    let id: UUID
+    let player: Player
+    let index: Int
+}
+
 enum Player: String {
     case x = "X"
     case o = "O"
@@ -31,6 +39,7 @@ final class GameEngine: ObservableObject {
     ]
 
     @Published private(set) var board: [Player?]
+    private var pieceIDs: [UUID?]
     @Published private(set) var currentPlayer: Player = .x
     @Published private(set) var phase: GamePhase = .placing
     @Published private(set) var winner: Player?
@@ -44,9 +53,19 @@ final class GameEngine: ObservableObject {
 
     init() {
         board = Array(repeating: nil, count: Self.boardSize * Self.boardSize)
+        pieceIDs = Array(repeating: nil, count: Self.boardSize * Self.boardSize)
     }
 
     var isGameOver: Bool { phase == .finished }
+
+    /// The placed pieces, each with a stable id that carries over when a
+    /// piece moves so the board view can animate its position sliding.
+    var pieces: [BoardPiece] {
+        (0..<board.count).compactMap { index in
+            guard let player = board[index], let id = pieceIDs[index] else { return nil }
+            return BoardPiece(id: id, player: player, index: index)
+        }
+    }
 
     /// CPU always plays O; the human plays X and moves first.
     var isHumanTurn: Bool { !(isCPUOpponent && currentPlayer == .o) }
@@ -78,6 +97,7 @@ final class GameEngine: ObservableObject {
 
     func reset() {
         board = Array(repeating: nil, count: Self.boardSize * Self.boardSize)
+        pieceIDs = Array(repeating: nil, count: Self.boardSize * Self.boardSize)
         currentPlayer = .x
         phase = .placing
         winner = nil
@@ -95,6 +115,7 @@ final class GameEngine: ObservableObject {
         guard board[index] == nil else { return }
 
         board[index] = currentPlayer
+        pieceIDs[index] = UUID()
         placedCount[currentPlayer, default: 0] += 1
 
         if checkWin(for: currentPlayer) {
@@ -133,6 +154,8 @@ final class GameEngine: ObservableObject {
 
         board[index] = currentPlayer
         board[selected] = nil
+        pieceIDs[index] = pieceIDs[selected]
+        pieceIDs[selected] = nil
         selectedIndex = nil
 
         if checkWin(for: currentPlayer) {

@@ -8,7 +8,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                AnimatedBackground()
+                AmbientBackground()
 
                 VStack(spacing: 0) {
                     Spacer()
@@ -101,28 +101,6 @@ private struct FloatingMark: View {
                     offsetY = -16
                 }
             }
-    }
-}
-
-private struct AnimatedBackground: View {
-    @State private var animate = false
-
-    var body: some View {
-        ZStack {
-            Theme.background
-            LinearGradient(
-                colors: [Theme.xColor, Theme.accent, Theme.oColor],
-                startPoint: animate ? .topLeading : .bottomTrailing,
-                endPoint: animate ? .bottomTrailing : .topLeading
-            )
-            .opacity(0.16)
-        }
-        .ignoresSafeArea()
-        .onAppear {
-            withAnimation(.easeInOut(duration: 6).repeatForever(autoreverses: true)) {
-                animate = true
-            }
-        }
     }
 }
 

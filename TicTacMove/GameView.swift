@@ -3,19 +3,21 @@ import UIKit
 
 struct GameView: View {
     @ObservedObject var engine: GameEngine
+    @Environment(\.dismiss) private var dismiss
     @State private var showConfetti = false
 
     var body: some View {
         ZStack {
-            Theme.background.ignoresSafeArea()
+            AmbientBackground()
 
-            VStack(spacing: 28) {
+            VStack(spacing: 24) {
+                topBar
                 header
                 BoardView(engine: engine)
                     .padding(.horizontal, 20)
                 Spacer(minLength: 0)
             }
-            .padding(.top, 12)
+            .padding(.top, 8)
             .padding(.bottom, 24)
 
             if showConfetti {
@@ -24,37 +26,27 @@ struct GameView: View {
                     .transition(.opacity)
             }
         }
-        .navigationTitle("Tic Tac Move")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbarColorScheme(.dark, for: .navigationBar)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Menu {
-                    Button {
-                        withAnimation { engine.resetScores() }
-                    } label: {
-                        Label("スコアをリセット", systemImage: "arrow.counterclockwise.circle")
-                    }
-                    NavigationLink {
-                        HowToPlayView()
-                    } label: {
-                        Label("遊び方", systemImage: "questionmark.circle")
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                        .foregroundStyle(.white)
-                }
-            }
-        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
         .onChange(of: engine.currentPlayer) { _ in
             triggerAIIfNeeded()
         }
-        .onAppear {
-            triggerAIIfNeeded()
+        .onChange(of: engine.selectedIndex) { newValue in
+            if newValue != nil { SoundPlayer.shared.play(.select) }
+        }
+        .onChange(of: engine.board) { _ in
+            SoundPlayer.shared.play(.piece)
         }
         .onChange(of: engine.winner) { winner in
             guard winner != nil else { return }
             celebrateWin()
+        }
+        .onAppear {
+            SoundPlayer.shared.startBGM()
+            triggerAIIfNeeded()
+        }
+        .onDisappear {
+            SoundPlayer.shared.stopBGM()
         }
         .alert(
             "ゲーム終了",
@@ -76,6 +68,43 @@ struct GameView: View {
         }
     }
 
+    private var topBar: some View {
+        HStack {
+            circleButton(systemImage: "chevron.left") { dismiss() }
+            Spacer()
+            Menu {
+                Button {
+                    withAnimation { engine.resetScores() }
+                } label: {
+                    Label("スコアをリセット", systemImage: "arrow.counterclockwise.circle")
+                }
+                NavigationLink {
+                    HowToPlayView()
+                } label: {
+                    Label("遊び方", systemImage: "questionmark.circle")
+                }
+            } label: {
+                circleButtonLabel(systemImage: "ellipsis")
+            }
+        }
+        .padding(.horizontal, 20)
+    }
+
+    private func circleButton(systemImage: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            circleButtonLabel(systemImage: systemImage)
+        }
+    }
+
+    private func circleButtonLabel(systemImage: String) -> some View {
+        Image(systemName: systemImage)
+            .font(.headline)
+            .foregroundStyle(.white)
+            .frame(width: 40, height: 40)
+            .background(Circle().fill(Theme.cardFill))
+            .overlay(Circle().stroke(Theme.cardStroke, lineWidth: 1))
+    }
+
     private func triggerAIIfNeeded() {
         guard engine.isCPUOpponent, !engine.isHumanTurn, !engine.isGameOver else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
@@ -87,6 +116,7 @@ struct GameView: View {
 
     private func celebrateWin() {
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+        SoundPlayer.shared.play(.win)
         withAnimation { showConfetti = true }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
             withAnimation { showConfetti = false }

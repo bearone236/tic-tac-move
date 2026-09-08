@@ -32,7 +32,7 @@ struct HowToPlayView: View {
             }
             .padding(20)
         }
-        .background(Theme.background.ignoresSafeArea())
+        .background(AmbientBackground())
         .scrollContentBackground(.hidden)
         .navigationTitle("遊び方")
         .navigationBarTitleDisplayMode(.inline)

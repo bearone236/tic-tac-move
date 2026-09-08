@@ -17,6 +17,12 @@
 		808F1B5DC1B5BBFFF5CDAE2D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E80D415013C111166EBC0A /* GameView.swift */; };
 		4222681603081E0033DB8452 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FC155D9103D3E9CDF794E /* ConfettiView.swift */; };
 		41660954EA5CD3B88EC90987 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA251804CF46600F00E9B95E /* Theme.swift */; };
+		CF49586E499A55DC01329F11 /* sfx_select.wav in Resources */ = {isa = PBXBuildFile; fileRef = DFF933330B74D7C8216E459E /* sfx_select.wav */; };
+		170E7AD120F813B99CF5D95E /* sfx_piece.wav in Resources */ = {isa = PBXBuildFile; fileRef = C0E27A581ED90793DCB9FEF0 /* sfx_piece.wav */; };
+		0F9D3DF4BA73380649024449 /* sfx_win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 73445429B57F1B9EFC237E93 /* sfx_win.wav */; };
+		45DD9FBA007C811A790BEAA2 /* bgm_ambient.wav in Resources */ = {isa = PBXBuildFile; fileRef = 582B293420EFE38C1D91ABB4 /* bgm_ambient.wav */; };
+		5CC2AA6D2E85FEC5A40C3900 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91FE54575DBE6F608438EBF /* SoundPlayer.swift */; };
+		C521898A234CEC554572AB7A /* AmbientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71698EF116117442259DD1AF /* AmbientBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +37,12 @@
 		B2E80D415013C111166EBC0A /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		012FC155D9103D3E9CDF794E /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		EA251804CF46600F00E9B95E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		DFF933330B74D7C8216E459E /* sfx_select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_select.wav; sourceTree = "<group>"; };
+		C0E27A581ED90793DCB9FEF0 /* sfx_piece.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_piece.wav; sourceTree = "<group>"; };
+		73445429B57F1B9EFC237E93 /* sfx_win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_win.wav; sourceTree = "<group>"; };
+		582B293420EFE38C1D91ABB4 /* bgm_ambient.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm_ambient.wav; sourceTree = "<group>"; };
+		E91FE54575DBE6F608438EBF /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		71698EF116117442259DD1AF /* AmbientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +73,14 @@
 				23030CFFD765F51FD39AB084 /* HowToPlayView.swift */,
 				012FC155D9103D3E9CDF794E /* ConfettiView.swift */,
 				EA251804CF46600F00E9B95E /* Theme.swift */,
+				71698EF116117442259DD1AF /* AmbientBackground.swift */,
+				E91FE54575DBE6F608438EBF /* SoundPlayer.swift */,
 				F78B9DA98D0513580BEDEF35 /* GameEngine.swift */,
 				DF36FFF094C0D296373D1736 /* BoardView.swift */,
+				DFF933330B74D7C8216E459E /* sfx_select.wav */,
+				C0E27A581ED90793DCB9FEF0 /* sfx_piece.wav */,
+				73445429B57F1B9EFC237E93 /* sfx_win.wav */,
+				582B293420EFE38C1D91ABB4 /* bgm_ambient.wav */,
 				AA66A77595C0C83CC510FFA1 /* Assets.xcassets */,
 				3C9B09BA14C38ABF76ADB7AA /* Preview Content */,
 			);
@@ -145,6 +163,10 @@
 			files = (
 				287BA1FD8E25A0E1CDFE9D00 /* Preview Assets.xcassets in Resources */,
 				E7BB4E1757FFDD1DEDB3F3FE /* Assets.xcassets in Resources */,
+				CF49586E499A55DC01329F11 /* sfx_select.wav in Resources */,
+				170E7AD120F813B99CF5D95E /* sfx_piece.wav in Resources */,
+				0F9D3DF4BA73380649024449 /* sfx_win.wav in Resources */,
+				45DD9FBA007C811A790BEAA2 /* bgm_ambient.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +183,8 @@
 				C16AA2C24005D5FBDF011C4B /* HowToPlayView.swift in Sources */,
 				4222681603081E0033DB8452 /* ConfettiView.swift in Sources */,
 				41660954EA5CD3B88EC90987 /* Theme.swift in Sources */,
+				C521898A234CEC554572AB7A /* AmbientBackground.swift in Sources */,
+				5CC2AA6D2E85FEC5A40C3900 /* SoundPlayer.swift in Sources */,
 				30D1C8436F6EC404EF9292AE /* GameEngine.swift in Sources */,
 				9576E8F67FFBDACBFEA92C39 /* BoardView.swift in Sources */,
 			);
